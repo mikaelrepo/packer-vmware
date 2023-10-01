@@ -272,7 +272,13 @@ Then I tried the `windows-update` provisioner, incorporating an initial pause of
       restart_timeout = "10m"
     }
 
-To bypass the Windows 11 TPM chip and other hardware requirements during OS installation check, one solution is to add below “RunSynchronousCommand” commands to the autounattend.xml file. Also set vm_vtpm = false in windows.auto.pkrvars.hcl.
+# Bypassing Windows 11 Hardware Checks
+
+To bypass hardware checks for the TPM chip and other requirements during Windows 11 installation, modify the `autounattend.xml` and `windows.auto.pkrvars.hcl` files as follows:
+
+- Add the `RunSynchronousCommand` commands to `autounattend.xml`.
+- Set `vm_vtpm = false` in `windows.auto.pkrvars.hcl`.
+
 
     <RunSynchronous>
        <RunSynchronousCommand wcm:action="add">
