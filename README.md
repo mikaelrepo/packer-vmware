@@ -140,6 +140,52 @@ This is a very handy feature in Packer to populate the autounattend.xml file wit
 # The Packer build file — windows.pkr.hcl
 
 This file contains the flow and logic of all the steps.
+    
+    /*
+        DESCRIPTION:
+        Microsoft Windows 11 Professional template using the Packer Builder for VMware vSphere (vsphere-iso).
+    */
+    
+    //  BLOCK: packer
+    //  The Packer configuration.
+    
+    packer {
+      required_version = ">= 1.8.3"
+      required_plugins {
+        vsphere = {
+          version = ">= v1.0.8"
+          source  = "github.com/hashicorp/vsphere"
+        }
+      }
+      required_plugins {
+        windows-update = {
+          version = ">= 0.14.1"
+          source  = "github.com/rgl/windows-update"
+        }
+      }
+    }
+    
+    //  BLOCK: locals
+    //  Defines the local variables.
+    
+    locals {
+      build_by           = "Built by: HashiCorp Packer ${packer.version}"
+      build_date         = formatdate("YYYY-MM-DD hh:mm ZZZ", timestamp())
+      build_version      = formatdate("YY.MM", timestamp())
+      build_description  = "Version: v${local.build_version}\nBuilt on: ${local.build_date}\n${local.build_by}"
+      iso_paths          = ["[${var.common_iso_datastore}] ${var.iso_path}/${var.iso_file}", "[] /vmimages/tools-isoimages/${var.vm_guest_os_family}.iso"]
+      iso_checksum       = "${var.iso_checksum_type}:${var.iso_checksum_value}"
+      manifest_date      = formatdate("YYYY-MM-DD hh:mm:ss", timestamp())
+      manifest_path      = "${path.cwd}/manifests/"
+      manifest_output    = "${local.manifest_path}${local.manifest_date}.json"
+      ovf_export_path    = "${path.cwd}/artifacts/${local.vm_name}"
+      vm_name            = "${var.vm_guest_os_family}-${var.vm_guest_os_name}-${var.vm_guest_os_version}-${var.vm_guest_os_edition}-v${local.build_version}"
+      bucket_name        = replace("${var.vm_guest_os_family}-${var.vm_guest_os_name}-${var.vm_guest_os_version}-${var.vm_guest_os_edition}", ".", "")
+      bucket_description = "${var.vm_guest_os_family} ${var.vm_guest_os_name} ${var.vm_guest_os_version} ${var.vm_guest_os_edition}"
+    }
+    
+    //  BLOCK: source
+    //  Defines the builder configuration blocks.
 
 # Required version and plugins
 
@@ -174,11 +220,11 @@ Provisioners use built-in and third-party software to install and configure the 
       ]
     }
 
-# Problems solved…
+# Automating Windows Updates…
 
-The most annoying part was automating Windows Updates so we always have the latest patches installed. I wanted to use Ansible so I found two ways of running a playbook. There is the actual “ansible” provisioner or one can also run a local shell using the “shell-local” provisioner. I was able to start the playbook with the ansible.windows.win_updates module but the Windows Update part always timed out so I gave this up. Code is commented out but feel free to try it. Was later told a pause for 60–120 seconds before running Ansible might help.
+To use Ansible for Windows Updates, I found two ways of running a playbook. The actual “ansible” provisioner or to run a local shell using the “shell-local” provisioner. I was able to start the playbook with the ansible.windows.win_updates module but the Windows Update part always timed out so I gave this up. Therefore this code is commented out. A pause for 60–120 seconds before running Ansible might solve this.
 
-Then I tried the “windows-update” provisioner and it worked great which actually do a pause for 60 seconds! It probably also helped to increase cpu to 4 and memory to 8192. So now when starting the newly built packer image, I noticed Windows Update needed another reboot to finish. After adding another 60 seconds wait time and the “windows-restart” provisioner, everything was working flawlessly!
+Then I tried the “windows-update” provisioner and it worked great which actually do a pause for 60 seconds! It may also helped to increase cpu to 4 and memory to 8192. So now when starting the newly built packer image, Windows Update also needs another reboot to finish. After adding another 60 seconds wait time and the “windows-restart” provisioner, everything was working flawlessly!
 
     provisioner "windows-update" {
       pause_before    = "60s"
