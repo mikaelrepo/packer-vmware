@@ -9,11 +9,26 @@ With Packer, you can:
 - **Leverage Extensive Plugins:** Packer supports builders and plugins for a multitude of sources, allowing for extensive customization and control. Learn more about [Packer plugins here.](https://www.packer.io/docs/plugins).
 - **Reuse Code Efficiently:** Minimize redundant work by reusing code. For instance, the code used for imaging Windows10 20H2 can be adapted with minimal changes to create an image for 21H2.
 
-# Let’s get started!
+# Getting Started with Packer
 
-Download and install [Packer by HashiCorp](https://developer.hashicorp.com/packer/downloads) and a Windows iso from Microsoft. You need an autounattend.xml file to modify Windows settings in your images for the OS installation. You can generate your own autounattend.xml file with [Windows System Image Manager (SIM)](https://learn.microsoft.com/en-us/windows-hardware/customize/desktop/wsim/windows-system-image-manager-overview-topics). Point the utility to the install.wim and you are ready to create the autounattend.xml file.
+To begin working with Packer, follow the steps below:
 
-Check out the official documentation and tutorials here -> [Packer | HashiCorp Developer](https://developer.hashicorp.com/packer).
+## 1. **Download and Install Packer**
+   - Download Packer from the [official HashiCorp website](https://www.packer.io/downloads).
+   - Follow the [installation instructions](https://developer.hashicorp.com/packer/tutorials/docker-get-started/get-started-install-cli) provided in the Packer documentation.
+
+## 2. **Download a Windows ISO from Microsoft**
+   - Choose a suitable Windows ISO from the [official Microsoft download page](https://www.microsoft.com/en-us/software-download/windows10ISO).
+
+## 3. **Generate `autounattend.xml` File**
+   - You will need an `autounattend.xml` file to modify Windows settings in your images during the OS installation.
+   - Generate your own `autounattend.xml` file using the [Windows System Image Manager (SIM)](https://learn.microsoft.com/en-us/windows-hardware/customize/desktop/wsim/windows-system-image-manager-overview-topics).
+   - Point the utility to the `install.wim` file to create the `autounattend.xml` file.
+
+## 4. **Refer to Official Documentation**
+   - For more detailed instructions and tutorials, refer to the [official Packer documentation](https://www.packer.io/docs) on the HashiCorp Developer website.
+
+# Overview of Files and Directories
 
 - variables.pkr.hcl — Declares variables and optionally set default values.
 - windows.auto.pkrvars.hcl — Defines the variables you declared in variables.pkr.hcl. The auto in the file lets Packer know this file should automatically be included in the build run.
@@ -22,7 +37,9 @@ Check out the official documentation and tutorials here -> [Packer | HashiCorp D
 - data/autounattend.pkrtpl.hcl — Answer file to modify Windows settings in theimage during setup.
 - scripts/windows/ — Custom powershell scripts.
 
-Run the packer command where all files are located …
+# Executing Packer Commands
+
+To initiate the Packer process, navigate to the directory where all your configuration files are located and run the following...
 
 - packer init . — Downloads required plugins for running the build(s).
 - packer validate . — Validates the syntax and configuration.
@@ -116,10 +133,12 @@ Windows specific variables are defined in windows.auto.pkrvars.hcl.
     communicator_port    = 5985
     communicator_timeout = "2h"
 
-Sensitive variables can also be defined as local user environment variables so it’s not ending up in a git repo…
+To avoid exposing sensitive information, define variables as local environment variables. This prevents them from being inadvertently pushed to a git repo.
 
-    PKR_VAR_vsphere_password=mySecretPass
-    PKR_VAR_build_password=mySecretPass
+```sh
+export PKR_VAR_vsphere_password=mySecretPass
+export PKR_VAR_build_password=mySecretPass
+```
 
 # The autounattend.xml file
 
