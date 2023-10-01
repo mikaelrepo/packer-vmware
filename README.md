@@ -47,8 +47,7 @@ To initiate the Packer process, navigate to the directory where all your configu
 
 # Declaring variables
 
-Variables are declared in the variables.pkr.hcl file.
-[Input and Local Variables guide | Packer | HashiCorp Developer](https://developer.hashicorp.com/packer/guides/hcl/variables#defining-variables-and-locals).
+Variables are declared in `variables.pkr.hcl`.
 
     variable "vsphere_password" {
       type        = string // Other examples are number, bool, list(string).
@@ -56,10 +55,11 @@ Variables are declared in the variables.pkr.hcl file.
       description = "The password for the login to the vCenter Server instance."
       sensitive   = true // Use sensitive variables for secrets or keys to hide them from output.
     }
+[Input and Local Variables guide | Packer | HashiCorp Developer](https://developer.hashicorp.com/packer/guides/hcl/variables#defining-variables-and-locals)
 
 # Defining variables
 
-Common variables are defined in common.pkrvars.hcl.
+Common variables are defined in `common.pkrvars.hcl`.
 
     // Virtual Machine Settings
     common_vm_version           = 19
@@ -88,7 +88,7 @@ Common variables are defined in common.pkrvars.hcl.
     vsphere_network    = "VM Network"
     vsphere_folder     = "templates"
 
-Windows specific variables are defined in windows.auto.pkrvars.hcl.
+Windows specific variables are defined in `windows.auto.pkrvars.hcl`.
 
     /*
         DESCRIPTION:
@@ -143,7 +143,7 @@ export PKR_VAR_build_password=mySecretPass
 
 # The autounattend.xml file
 
-This is a very handy feature in Packer to populate the autounattend.xml file with variables at runtime. The cd_content section in windows.pkr.hcl replaces the variables specified in the template file data/autounattend.pkrtpl.hcl so no need to hardcode values in the autounattend.xml file. Add a variable like this ${my_variable_name} and then declare in variables.pkr.hcl and finally define in windows.auto.pkrvars.hcl.
+This is a very handy feature in Packer to populate the autounattend.xml file with variables at runtime. The cd_content section in `windows.pkr.hcl` replaces the variables specified in the template file `data/autounattend.pkrtpl.hcl` so no need to hardcode values in the autounattend.xml file. Add a variable like this `${my_variable_name}` and then declare in `variables.pkr.hcl` and finally define in `windows.auto.pkrvars.hcl`.
 
     cd_content = {
         "autounattend.xml" = templatefile("${abspath(path.root)}/data/autounattend.pkrtpl.hcl", {
@@ -161,7 +161,7 @@ This is a very handy feature in Packer to populate the autounattend.xml file wit
 
 # The Packer build file — windows.pkr.hcl
 
-This file contains the flow and logic of all the steps. Packer version and the required plugins are specified here.
+This file contains the flow and logic of all the steps. The Packer version and any required plugins are specified here.
     
     /*
         DESCRIPTION:
@@ -211,7 +211,7 @@ This file contains the flow and logic of all the steps. Packer version and the r
 
 # Provisioners
 
-Provisioners use built-in and third-party software to install and configure the machine image after booting. A common provisioner is “powershell” for running scripts inside the Windows image OS. Example below runs the sysprep tool to seal the image as a final step.
+Provisioners use built-in and third-party software to install and configure the machine image after booting. A common provisioner is `powershell` for running scripts inside the Windows image OS. Example below runs the sysprep tool to seal the image in the final step.
 
     provisioner "powershell" {
       elevated_user     = var.build_username
