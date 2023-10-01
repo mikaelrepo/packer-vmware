@@ -241,11 +241,12 @@ Provisioners use built-in and third-party software to install and configure the 
       ]
     }
 
-# Automating Windows Updates…
 
-To use Ansible for Windows Updates, I found two ways of running a playbook. The actual “ansible” provisioner or to run a local shell using the “shell-local” provisioner. I was able to start the playbook with the ansible.windows.win_updates module but the Windows Update part always timed out so I gave this up. Therefore this code is commented out. A pause for 60–120 seconds before running Ansible might solve this.
+# Automating Windows Updates
 
-Then I tried the “windows-update” provisioner and it worked great which actually do a pause for 60 seconds! It may also helped to increase cpu to 4 and memory to 8192. So now when starting the newly built packer image, Windows Update also needs another reboot to finish. After adding another 60 seconds wait time and the “windows-restart” provisioner, everything was working flawlessly!
+Initially I tried to automate Windows Updates using Ansible, utilizing both the actual `ansible` provisioner and the `shell-local` provisioner to run playbooks. Although the playbooks started successfully with the `ansible.windows.win_updates` module, the Windows Update process consistently timed out, therefore this code is commented out. 
+
+Then I tried the `windows-update` provisioner, incorporating an initial pause of 60 seconds and this was succesful. Adjustments to the CPU and memory allocations may have also contributed to the successful implementation. An additional reboot to complete the Windows Update was required using the `windows-restart` provisioner, resulting in a flawless operation.
 
     provisioner "windows-update" {
       pause_before    = "60s"
