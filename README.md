@@ -133,7 +133,7 @@ Windows specific variables are defined in windows.auto.pkrvars.hcl.
     communicator_port    = 5985
     communicator_timeout = "2h"
 
-To avoid exposing sensitive information, define variables as local environment variables. This prevents them from being inadvertently pushed to a git repo.
+To avoid exposing sensitive information, one can define variables as local environment variables. This prevents them from being inadvertently pushed to a git repo.
 
 ```sh
 export PKR_VAR_vsphere_password=mySecretPass
