@@ -1,0 +1,8 @@
+---
+- name: "Ping"
+  hosts: all
+ 
+  tasks:
+    - name: Ping 
+      ansible.windows.win_ping:
+...

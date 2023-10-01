@@ -1,0 +1,13 @@
+---
+- name: "Patch Windows"
+  hosts: all
+ 
+  tasks:
+    - name: Windows Updates 
+      ansible.windows.win_updates:
+        category_names:
+        - SecurityUpdates
+        - CriticalUpdates
+        reboot: yes
+        reboot_timeout: 3600
+...

@@ -1,0 +1,29 @@
+{
+  "builds": [
+    {
+      "name": "windows-desktop",
+      "builder_type": "vsphere-iso",
+      "files": null,
+      "artifact_id": "windows-desktop-11-pro-v22.11",
+      "packer_run_uuid": "aa1f6b3c-586d-83c2-6d8b-49baebf2b862",
+      "custom_data": {
+        "build_date": "2022-11-11 12:26 UTC",
+        "build_version": "22.11",
+        "common_data_source": "http",
+        "common_vm_version": "19",
+        "vm_cpu_cores": "1",
+        "vm_cpu_count": "2",
+        "vm_disk_size": "102400",
+        "vm_disk_thin_provisioned": "true",
+        "vm_firmware": "efi-secure",
+        "vm_guest_os_type": "windows9_64Guest",
+        "vm_mem_size": "4096",
+        "vm_network_card": "vmxnet3",
+        "vm_video_displays": "1",
+        "vm_video_memory": "131072",
+        "vm_vtpm": "false"
+      }
+    }
+  ],
+  "last_run_uuid": "aa1f6b3c-586d-83c2-6d8b-49baebf2b862"
+}

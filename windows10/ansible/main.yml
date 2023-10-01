@@ -1,0 +1,11 @@
+---
+- name: "Provision Windows image"
+  hosts: default
+ 
+  tasks:
+    - name: Windows Updates 
+      ansible.windows.win_updates:
+        category_names: "*"
+        reboot: yes
+        reboot_timeout: 3600
+...

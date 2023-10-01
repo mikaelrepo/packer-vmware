@@ -1,0 +1,7 @@
+ansible_port: 5985
+ansible_connection: winrm
+ansible_winrm_server_cert_validation: ignore
+ANSIBLE_PERSISTENT_COMMAND_TIMEOUT: 300
+ansible_command_timeout: 300
+ansible_winrm_read_timeout_sec: 200
+ansible_user: admin1
