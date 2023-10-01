@@ -160,7 +160,7 @@ This is a very handy feature in Packer to populate the autounattend.xml file wit
 
 # The Packer build file — windows.pkr.hcl
 
-This file contains the flow and logic of all the steps.
+This file contains the flow and logic of all the steps. Packer version and the required plugins are specified here.
     
     /*
         DESCRIPTION:
@@ -207,26 +207,6 @@ This file contains the flow and logic of all the steps.
     
     //  BLOCK: source
     //  Defines the builder configuration blocks.
-
-# Required version and plugins
-
-Specify the required Packer version, here we have the vsphere.iso plugin for VMware, and optionally a plugin that works well for installing Windows updates.
-
-    packer {
-      required_version = ">= 1.8.3"
-      required_plugins {
-        vsphere = {
-          version = ">= v1.0.8"
-          source  = "github.com/hashicorp/vsphere"
-        }
-      }
-      required_plugins {
-        windows-update = {
-          version = ">= 0.14.1"
-          source  = "github.com/rgl/windows-update"
-        }
-      }
-    }
 
 # Provisioners
 
