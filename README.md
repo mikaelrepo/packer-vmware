@@ -47,7 +47,7 @@ To initiate the Packer process, navigate to the directory where all your configu
 
 # Declaring variables
 
-Variables must be declared in the variables.pkr.hcl file… [Input and Local Variables guide | Packer | HashiCorp Developer](https://developer.hashicorp.com/packer/guides/hcl/variables#defining-variables-and-locals).
+Variables are declared in the variables.pkr.hcl file… [Input and Local Variables guide | Packer | HashiCorp Developer](https://developer.hashicorp.com/packer/guides/hcl/variables#defining-variables-and-locals).
 
     variable "vsphere_password" {
       type        = string // Other examples are number, bool, list(string).
