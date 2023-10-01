@@ -4,14 +4,14 @@ Packer is a free tool developed by HashiCorp. It is used to automate and create 
 
 - Create your own library of images or templates, automatically updated with the latest security patches, any Windows features or roles you need or any other custom configuration you want in the base image.
 - Automatically generate new builds in a continuous delivery model ready for provisioning.
-- Packer has builders and plugins for many different sources. Packer plugins | Packer | HashiCorp Developer
+- Packer has builders and plugins for many different sources. [Packer plugins | Packer | HashiCorp Developer](https://developer.hashicorp.com/packer/plugins)
 - Reuse the code for a certain Windows OS, for example code for Windows10 20H2 imaging can be used to create an image for 21H2 with minimal changes.
 
 # Let’s get started!
 
-Download and install Packer by HashiCorp and a Windows iso from Microsoft. You need an autounattend.xml file to modify Windows settings in your images for the OS installation. You can generate your own autounattend.xml file with Windows System Image Manager (SIM). Windows System Image Manager Overview Topics. Point the utility to the install.wim and you are ready to create the autounattend.xml file.
+Download and install [Packer by HashiCorp](https://developer.hashicorp.com/packer/downloads) and a Windows iso from Microsoft. You need an autounattend.xml file to modify Windows settings in your images for the OS installation. You can generate your own autounattend.xml file with [Windows System Image Manager (SIM)](https://learn.microsoft.com/en-us/windows-hardware/customize/desktop/wsim/windows-system-image-manager-overview-topics). Point the utility to the install.wim and you are ready to create the autounattend.xml file.
 
-If you are new to Packer, check out the official documentation and the tutorials here -> Packer | HashiCorp Developer. Clone my repo here -> GitHub — mikaelrepo/packer.
+Check out the official documentation and tutorials here -> [Packer | HashiCorp Developer](https://developer.hashicorp.com/packer).
 
 - variables.pkr.hcl — Declares variables and optionally set default values.
 - windows.auto.pkrvars.hcl — Defines the variables you declared in variables.pkr.hcl. The auto in the file lets Packer know this file should automatically be included in the build run.
@@ -28,7 +28,7 @@ Run the packer command where all files are located …
 
 # Declaring variables
 
-Variables must be declared in the variables.pkr.hcl file… Input and Local Variables guide | Packer | HashiCorp Developer
+Variables must be declared in the variables.pkr.hcl file… [Input and Local Variables guide | Packer | HashiCorp Developer](https://developer.hashicorp.com/packer/guides/hcl/variables#defining-variables-and-locals).
 
     variable "vsphere_password" {
       type        = string // Other examples are number, bool, list(string).
