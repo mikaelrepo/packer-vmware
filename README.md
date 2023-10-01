@@ -5,21 +5,9 @@
 With Packer, you can:
 
 - **Build Customized Images:** Create your own library of images or templates, tailored with any custom configurations, Windows features, or roles you need in the base image. These can be automatically updated with the latest security patches.
-  
 - **Automate Image Generation:** Streamline the creation of new builds through a continuous delivery model, making them ready for provisioning seamlessly.
-  
-- **Leverage Extensive Plugins:** Packer supports builders and plugins for a multitude of sources, allowing for extensive customization and control. Learn more about Packer plugins in the [HashiCorp Developer Guide](https://www.packer.io/docs/plugins).
-  
+- **Leverage Extensive Plugins:** Packer supports builders and plugins for a multitude of sources, allowing for extensive customization and control. Learn more about [Packer plugins here.](https://www.packer.io/docs/plugins).
 - **Reuse Code Efficiently:** Minimize redundant work by reusing code. For instance, the code used for imaging Windows10 20H2 can be adapted with minimal changes to create an image for 21H2.
-
-# What is Packer?
-
-Packer, developed by HashiCorp, is an open-source tool designed to automate the creation of machine images across various operating systems. It streamlines the process of building identical machine images for multiple platforms from a single source configuration.
-
-- Custom Image Library: Develop your personalized library of images or templates. Ensure they are always up-to-date with the latest security patches, required Windows features, roles, and any other custom configurations needed in the base image.
-- Automatically generate new builds in a continuous delivery model ready for provisioning.
-- Packer has builders and plugins for many different sources. [Packer plugins | Packer | HashiCorp Developer](https://developer.hashicorp.com/packer/plugins)
-- Reuse the code for a certain Windows OS, for example code for Windows10 20H2 imaging can be used to create an image for 21H2 with minimal changes.
 
 # Let’s get started!
 
