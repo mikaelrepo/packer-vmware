@@ -279,31 +279,30 @@ To bypass hardware checks for the TPM chip and other requirements during Windows
 - Add the `RunSynchronousCommand` commands to `autounattend.xml`.
 - Set `vm_vtpm = false` in `windows.auto.pkrvars.hcl`.
 
-
-    <RunSynchronous>
-       <RunSynchronousCommand wcm:action="add">
-        <Order>1</Order>
-        <Path>reg add HKLM\System\Setup\LabConfig /v BypassTPMCheck /t reg_dword /d 0x00000001 /f</Path>
-       </RunSynchronousCommand>
-       <RunSynchronousCommand wcm:action="add">
-        <Order>2</Order>
-        <Path>reg add HKLM\System\Setup\LabConfig /v BypassSecureBootCheck /t reg_dword /d 0x00000001 /f</Path>
-       </RunSynchronousCommand>
-       <RunSynchronousCommand wcm:action="add">
-        <Order>3</Order>
-        <Path>reg add HKLM\System\Setup\LabConfig /v BypassRAMCheck /t reg_dword /d 0x00000001 /f</Path>
-       </RunSynchronousCommand>
-       <RunSynchronousCommand wcm:action="add">
-           <Order>4</Order>
-        <Path>reg add HKLM\System\Setup\LabConfig /v BypassCPUCheck /t reg_dword /d 0x00000001 /f</Path>
-       </RunSynchronousCommand>
-       <RunSynchronousCommand wcm:action="add">
-           <Order>5</Order>
-        <Path>reg add HKLM\System\Setup\LabConfig /v BypassStorageCheck /t reg_dword /d 0x00000001 /f</Path>
-       </RunSynchronousCommand>
-       <RunSynchronousCommand>
-           <Order>6</Order>
-           <!-- Set power scheme to high performance in WinPE for faster imaging. -->
-           <Path>cmd /c powercfg.exe /s 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c</Path>
-       </RunSynchronousCommand>  
-    </RunSynchronous>
+       <RunSynchronous>
+          <RunSynchronousCommand wcm:action="add">
+           <Order>1</Order>
+           <Path>reg add HKLM\System\Setup\LabConfig /v BypassTPMCheck /t reg_dword /d 0x00000001 /f</Path>
+          </RunSynchronousCommand>
+          <RunSynchronousCommand wcm:action="add">
+           <Order>2</Order>
+           <Path>reg add HKLM\System\Setup\LabConfig /v BypassSecureBootCheck /t reg_dword /d 0x00000001 /f</Path>
+          </RunSynchronousCommand>
+          <RunSynchronousCommand wcm:action="add">
+           <Order>3</Order>
+           <Path>reg add HKLM\System\Setup\LabConfig /v BypassRAMCheck /t reg_dword /d 0x00000001 /f</Path>
+          </RunSynchronousCommand>
+          <RunSynchronousCommand wcm:action="add">
+              <Order>4</Order>
+           <Path>reg add HKLM\System\Setup\LabConfig /v BypassCPUCheck /t reg_dword /d 0x00000001 /f</Path>
+          </RunSynchronousCommand>
+          <RunSynchronousCommand wcm:action="add">
+              <Order>5</Order>
+           <Path>reg add HKLM\System\Setup\LabConfig /v BypassStorageCheck /t reg_dword /d 0x00000001 /f</Path>
+          </RunSynchronousCommand>
+          <RunSynchronousCommand>
+              <Order>6</Order>
+              <!-- Set power scheme to high performance in WinPE for faster imaging. -->
+              <Path>cmd /c powercfg.exe /s 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c</Path>
+          </RunSynchronousCommand>  
+       </RunSynchronous>
