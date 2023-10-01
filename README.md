@@ -41,8 +41,8 @@ To begin working with Packer, follow the steps below:
 
 To initiate the Packer process, navigate to the directory where all your configuration files are located and run the following...
 
-- packer init . — Downloads required plugins for running the build(s).
-- packer validate . — Validates the syntax and configuration.
+- packer init — Downloads required plugins for running the build(s).
+- packer validate — Validates the syntax and configuration.
 - packer build -force -var-file=”common.pkrvars.hcl” — Run the build(s).
 
 # Declaring variables
